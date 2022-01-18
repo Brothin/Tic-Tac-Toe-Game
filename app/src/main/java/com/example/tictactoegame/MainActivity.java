@@ -3,9 +3,11 @@ package com.example.tictactoegame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     boolean gameActive=true;
@@ -49,26 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 status.setText("O's Turn");
             }
             img.animate().translationYBy(1000f).setDuration(300);
-            // Check if match is a draw
-            int count=0;
-            for(int i=0;i<gameState.length;i++)
-            {
-                if(gameState[i]!=2)
-                    count++;
-            }
-            if(count==9)
-            {
-                TextView status=findViewById(R.id.status);
-                status.setText("Draw!");
-                gameReset(view);
-            }
         }
         // Check if any player has won
         for(int[] winPosition:winPositions)
         {
             if(gameState[winPosition[0]]==gameState[winPosition[1]] &&
-            gameState[winPosition[1]]==gameState[winPosition[2]] &&
-            gameState[winPosition[0]]!=2)
+               gameState[winPosition[1]]==gameState[winPosition[2]] &&
+               gameState[winPosition[0]]!=2)
             {
                 // Someone won!
                 String winner;
